@@ -38,6 +38,7 @@ ENV TZ Asia/Shanghai
 RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates && apk upgrade --no-cache
 
 RUN wget https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/blacklist_full.conf -O /root/blacklist_full.conf
+RUN wget https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/whitelist_full.conf -O /root/whitelist_full.conf
 
 ADD entrypoint.sh /root
 ADD smartdns.conf /root
@@ -49,6 +50,6 @@ WORKDIR /etc/smartdns
 EXPOSE 53/udp 
 EXPOSE 53/tcp
 
-HEALTHCHECK --interval=5s --timeout=3s CMD nslookup -querytype=A www.baidu.com 127.0.0.1 | sed -n '6,7p' || exit 1
+HEALTHCHECK --interval=5s --timeout=10s CMD nslookup -querytype=A www.baidu.com 127.0.0.1 | sed -n '6,7p' || exit 1
 
 ENTRYPOINT ["/root/entrypoint.sh"]
