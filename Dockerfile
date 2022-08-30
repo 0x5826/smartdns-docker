@@ -15,7 +15,7 @@ RUN case "$(dpkg --print-architecture)" in \
         BUILD_TARGET="arm64" \
         ;; \
     *) \
-        echo "Doesn't support $TARGETARCH architecture" \
+        echo "Doesn't support $(dpkg --print-architecture) architecture" \
         exit 1 \
         ;; \
     esac && \
