@@ -12,4 +12,10 @@ then
     echo "[NOTICE] smartdns.conf inited."
 fi
 
+if [ ! -f "/etc/smartdns/blacklist_full.conf" ]
+then
+    cp /root/blacklist_full.conf /etc/smartdns
+    echo "[NOTICE] blacklist_full.conf inited."
+fi
+
 /usr/sbin/smartdns -f -x
