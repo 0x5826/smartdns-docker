@@ -7,7 +7,8 @@ RUN apt update && apt install -y git make gcc libssl-dev
 
 WORKDIR /root
 
-RUN case "$(dpkg --print-architecture)" in \
+RUN ARCH=$(dpkg --print-architecture) \
+    && case "$ARCH" in \
     "amd64") \
         BUILD_TARGET="x86-64" \
         ;; \
@@ -15,7 +16,7 @@ RUN case "$(dpkg --print-architecture)" in \
         BUILD_TARGET="arm64" \
         ;; \
     *) \
-        echo "Doesn't support $(dpkg --print-architecture) architecture" \
+        echo "Doesn't support $ARCH architecture" \
         exit 1 \
         ;; \
     esac && \
