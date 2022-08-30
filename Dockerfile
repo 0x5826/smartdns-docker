@@ -2,13 +2,12 @@ FROM debian:bullseye-slim AS builder
 
 ARG TAG
 ARG REPOSITORY
-ARG TARGETARCH
 
 RUN apt update && apt install -y git make gcc libssl-dev
 
 WORKDIR /root
 
-RUN case "$TARGETARCH" in \
+RUN case "$(dpkg --print-architecture)" in \
     "amd64") \
         BUILD_TARGET="x86-64" \
         ;; \
