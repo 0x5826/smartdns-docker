@@ -19,7 +19,7 @@ RUN ARCH=$(dpkg --print-architecture) \
         echo "Doesn't support $ARCH architecture" \
         exit 1 \
         ;; \
-    esac && \
+    esac \
     && git clone https://github.com/${REPOSITORY} smartdns \
     && cd smartdns \
     && git fetch --all --tags \
