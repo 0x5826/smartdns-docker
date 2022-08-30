@@ -20,7 +20,6 @@ RUN case "$TARGETARCH" in \
         exit 1 \
         ;; \
     esac && \
-    apk add --update git \
     && git clone https://github.com/${REPOSITORY} smartdns \
     && cd smartdns \
     && git fetch --all --tags \
