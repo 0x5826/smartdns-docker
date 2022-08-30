@@ -25,13 +25,13 @@ RUN ARCH=$(dpkg --print-architecture) \
     && git fetch --all --tags \
     && git checkout tags/${TAG} \
     && sh package/build-pkg.sh --platform linux --arch $BUILD_TARGET --static \
-    && strip -s src/smartdns && cp src/smartdns /usr/sbin
+    && strip -s src/smartdns && cp src/smartdns /usr/bin
 
 FROM alpine:latest
 
 LABEL maintainer="dante"
 
-COPY --from=builder /usr/sbin/smartdns /usr/sbin/smartdns
+COPY --from=builder /usr/bin/smartdns /usr/bin/smartdns
 
 ENV TZ Asia/Shanghai
 

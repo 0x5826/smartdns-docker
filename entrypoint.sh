@@ -18,4 +18,4 @@ then
     echo "[NOTICE] blacklist_full.conf inited."
 fi
 
-/usr/sbin/smartdns -f -x
+/usr/bin/smartdns -f -x

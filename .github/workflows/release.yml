@@ -5,7 +5,7 @@ on:
     paths:
       - "tag"
       - "Dockerfile"
-      - "config.yaml"
+      - "smartdns.conf"
       - "entrypoint.sh"
       - ".github/workflows/release.yml"
   workflow_dispatch:
