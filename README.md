@@ -17,6 +17,6 @@ services:
     volumes:
       - "<HOST_DATA>/smartdns:/etc/smartdns"
     ports:
-      - "192.168.10.2:53:53/tcp"
-      - "192.168.10.2:53:53/udp"
+      - "53:53/tcp"
+      - "53:53/udp"
 ```
