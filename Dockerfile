@@ -34,15 +34,19 @@ LABEL maintainer="dante"
 COPY --from=builder /usr/bin/smartdns /usr/bin/smartdns
 
 ENV TZ Asia/Shanghai
+ENV BALCKLIST_URL https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/blacklist_lite.conf
+ENV WHITELIST_URL https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/whitelist_lite.conf
 
 RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates && apk upgrade --no-cache
 
-RUN wget https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/blacklist_full.conf -O /root/blacklist_full.conf
-RUN wget https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/whitelist_full.conf -O /root/whitelist_full.conf
-
-ADD entrypoint.sh /root
 ADD smartdns.conf /root
-RUN chmod a+x /root/entrypoint.sh
+ADD entrypoint.sh /root
+ADD update_rules.sh /root
+RUN chmod a+x /root/entrypoint.sh && \
+    chmod a+x /root/update_rules.sh && \
+    wget $BALCKLIST_URL -O /root/blacklist_full.conf && \
+    wget $WHITELIST_URL -O /root/whitelist_full.conf && \
+    cp /root/update_rules.sh /etc/periodic/weekly/update_rules
 
 VOLUME /etc/smartdns
 WORKDIR /etc/smartdns
@@ -50,6 +54,6 @@ WORKDIR /etc/smartdns
 EXPOSE 53/udp 
 EXPOSE 53/tcp
 
-HEALTHCHECK --interval=5s --timeout=10s CMD nslookup -querytype=A www.baidu.com 127.0.0.1 | sed -n '6,7p' || exit 1
+HEALTHCHECK --interval=10s --timeout=10s CMD nslookup -querytype=A www.baidu.com 127.0.0.1 | sed -n '6,7p' || exit 1
 
 ENTRYPOINT ["/root/entrypoint.sh"]

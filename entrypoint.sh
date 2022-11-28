@@ -1,28 +1,42 @@
 #!/bin/sh
 
-if [ ! -d "/etc/smartdns" ]
+CONF_DIR="/etc/smartdns"
+RULES_DIR"/etc/smartdns/rules"
+
+if [ ! -d "$CONF_DIR" ]
 then
-    mkdir -p /etc/smartdns
-    echo "[NOTICE] config dir inited."
+    mkdir -p $CONF_DIR
+    echo "[NOTICE] $CONF_DIR inited."
 fi
 
-if [ ! -f "/etc/smartdns/smartdns.conf" ]
+if [ ! -d "$RULES_DIR" ]
 then
-    cp /root/smartdns.conf /etc/smartdns
+    mkdir -p $RULES_DIR
+    echo "[NOTICE] $RULES_DIR inited."
+fi
+
+if [ ! -f "$CONF_DIR/smartdns.conf" ]
+then
+    cp /root/smartdns.conf $CONF_DIR
     echo "[NOTICE] smartdns.conf inited."
 fi
 
-if [ ! -f "/etc/smartdns/blacklist_full.conf" ]
+if [ ! -f "$RULES_DIR/hosts.conf" ]
 then
-    cp /root/blacklist_full.conf /etc/smartdns
+    touch $RULES_DIR/hosts.conf
+    echo "[NOTICE] hosts.conf inited."
+fi
+
+if [ ! -f "$RULES_DIR/blacklist_full.conf" ]
+then
+    cp /root/blacklist_full.conf $RULES_DIR
     echo "[NOTICE] blacklist_full.conf inited."
 fi
 
-if [ ! -f "/etc/smartdns/whitelist_full.conf" ]
+if [ ! -f "$RULES_DIR/whitelist_full.conf" ]
 then
-    cp /root/whitelist_full.conf /etc/smartdns
+    cp /root/whitelist_full.conf $RULES_DIR
     echo "[NOTICE] whitelist_full.conf inited."
 fi
-
 
 /usr/bin/smartdns -f -x
