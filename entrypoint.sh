@@ -1,7 +1,7 @@
 #!/bin/sh
 
 CONF_DIR="/etc/smartdns"
-RULES_DIR"/etc/smartdns/rules"
+RULES_DIR="/etc/smartdns/rules"
 
 if [ ! -f "$CONF_DIR/smartdns.conf" ]
 then
