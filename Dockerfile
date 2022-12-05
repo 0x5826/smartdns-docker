@@ -42,7 +42,6 @@ RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates && apk up
 ADD smartdns.conf /root
 ADD entrypoint.sh /root
 RUN chmod a+x /root/entrypoint.sh && \
-    chmod a+x /root/update_rules.sh && \
     wget $WHITELIST_URL -O /root/domestic.conf && \
     wget $BLACKLIST_URL -O /root/foreign.conf
 
