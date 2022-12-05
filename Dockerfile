@@ -44,9 +44,8 @@ ADD entrypoint.sh /root
 ADD update_rules.sh /root
 RUN chmod a+x /root/entrypoint.sh && \
     chmod a+x /root/update_rules.sh && \
-    wget $BLACKLIST_URL -O /root/blacklist_full.conf && \
-    wget $WHITELIST_URL -O /root/whitelist_full.conf && \
-    cp /root/update_rules.sh /etc/periodic/weekly/update_rules
+    wget $BLACKLIST_URL -O /root/blacklist.conf && \
+    wget $WHITELIST_URL -O /root/whitelist.conf
 
 VOLUME /etc/smartdns
 WORKDIR /etc/smartdns
