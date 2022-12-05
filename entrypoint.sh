@@ -21,16 +21,16 @@ then
     echo "[NOTICE] hosts.conf inited."
 fi
 
-if [ ! -f "$RULES_DIR/blacklist.conf" ]
+if [ ! -f "$RULES_DIR/foreign.conf" ]
 then
-    cp /root/blacklist.conf $RULES_DIR
-    echo "[NOTICE] blacklist.conf inited."
+    cp /root/foreign.conf $RULES_DIR
+    echo "[NOTICE] foreign.conf inited."
 fi
 
-if [ ! -f "$RULES_DIR/whitelist.conf" ]
+if [ ! -f "$RULES_DIR/domestic.conf" ]
 then
-    cp /root/whitelist.conf $RULES_DIR
-    echo "[NOTICE] whitelist.conf inited."
+    cp /root/domestic.conf $RULES_DIR
+    echo "[NOTICE] domestic.conf inited."
 fi
 
 /usr/bin/smartdns -f -x

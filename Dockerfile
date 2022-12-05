@@ -34,18 +34,17 @@ LABEL maintainer="dante"
 COPY --from=builder /usr/bin/smartdns /usr/bin/smartdns
 
 ENV TZ Asia/Shanghai
-ENV BLACKLIST_URL https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/blacklist_lite.conf
 ENV WHITELIST_URL https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/whitelist_lite.conf
+ENV BLACKLIST_URL https://raw.githubusercontent.com/hezhijie0327/GFWList2AGH/main/gfwlist2smartdns/blacklist_lite.conf
 
 RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates && apk upgrade --no-cache
 
 ADD smartdns.conf /root
 ADD entrypoint.sh /root
-ADD update_rules.sh /root
 RUN chmod a+x /root/entrypoint.sh && \
     chmod a+x /root/update_rules.sh && \
-    wget $BLACKLIST_URL -O /root/blacklist.conf && \
-    wget $WHITELIST_URL -O /root/whitelist.conf
+    wget $WHITELIST_URL -O /root/domestic.conf && \
+    wget $BLACKLIST_URL -O /root/foreign.conf
 
 VOLUME /etc/smartdns
 WORKDIR /etc/smartdns
