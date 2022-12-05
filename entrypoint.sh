@@ -21,16 +21,10 @@ then
     echo "[NOTICE] hosts.conf inited."
 fi
 
-if [ ! -f "$RULES_DIR/foreign.conf" ]
+if [ ! -f "$RULES_DIR/gfw.conf" ]
 then
-    cp /root/foreign.conf $RULES_DIR
-    echo "[NOTICE] foreign.conf inited."
-fi
-
-if [ ! -f "$RULES_DIR/domestic.conf" ]
-then
-    cp /root/domestic.conf $RULES_DIR
-    echo "[NOTICE] domestic.conf inited."
+    cp /root/gfw.conf $RULES_DIR
+    echo "[NOTICE] gfw.conf inited."
 fi
 
 /usr/bin/smartdns -f -x
