@@ -35,7 +35,7 @@ COPY --from=builder /usr/bin/smartdns /usr/bin/smartdns
 
 ENV TZ Asia/Shanghai
 
-RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates && apk upgrade --no-cache
+RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates curl && apk upgrade --no-cache
 
 WORKDIR /root
 ADD smartdns.conf /root
