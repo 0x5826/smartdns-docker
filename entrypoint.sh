@@ -18,13 +18,20 @@ fi
 if [ ! -f "$RULES_DIR/hosts.conf" ]
 then
     touch $RULES_DIR/hosts.conf
+    echo "# address /www.example.com/1.2.3.4" > $RULES_DIR/hosts.conf
     echo "[NOTICE] hosts.conf inited."
 fi
 
-if [ ! -f "$RULES_DIR/gfw.conf" ]
+if [ ! -f "$RULES_DIR/domestic.conf" ]
 then
-    cp /root/gfw.conf $RULES_DIR
-    echo "[NOTICE] gfw.conf inited."
+    cp /root/domestic.conf $RULES_DIR
+    echo "[NOTICE] domestic.conf inited."
+fi
+
+if [ ! -f "$RULES_DIR/foreign.conf" ]
+then
+    cp /root/foreign.conf $RULES_DIR
+    echo "[NOTICE] foreign.conf inited."
 fi
 
 /usr/bin/smartdns -f -x

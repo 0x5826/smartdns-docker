@@ -39,11 +39,11 @@ RUN apk update --no-cache && apk add --no-cache tzdata ca-certificates curl && a
 
 WORKDIR /root
 ADD smartdns.conf /root
-ADD init_gfw_conf.sh /root
+ADD init_rules.sh /root
 ADD entrypoint.sh /root
-RUN chmod a+x /root/init_gfw_conf.sh && \
+RUN chmod a+x /root/init_rules.sh && \
     chmod a+x /root/entrypoint.sh && \
-    sh /root/init_gfw_conf.sh
+    sh /root/init_rules.sh
 
 VOLUME /etc/smartdns
 WORKDIR /etc/smartdns
