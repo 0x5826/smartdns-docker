@@ -1,6 +1,7 @@
 FROM debian:bullseye-slim AS builder
 
-ARG VERSION
+ARG TAG
+ARG REPOSITORY
 
 RUN apt update && apt install -y git make gcc libssl-dev
 
@@ -19,10 +20,10 @@ RUN ARCH=$(dpkg --print-architecture) \
         exit 1 \
         ;; \
     esac \
-    && git clone https://github.com/pymumu/smartdns smartdns \
+    && git clone https://github.com/${REPOSITORY} smartdns \
     && cd smartdns \
     && git fetch --all --tags \
-    && git checkout tags/${VERSION} \
+    && git checkout tags/${TAG} \
     && sh package/build-pkg.sh --platform linux --arch $BUILD_TARGET --static \
     && strip -s src/smartdns && cp src/smartdns /usr/bin
 
@@ -50,6 +51,6 @@ WORKDIR /etc/smartdns
 EXPOSE 53/udp 
 EXPOSE 53/tcp
 
-HEALTHCHECK --interval=30s --timeout=3s CMD nslookup -querytype=A www.baidu.com 127.0.0.1 | sed -n '6,7p' || exit 1
+HEALTHCHECK --interval=10s --timeout=10s CMD nslookup -querytype=A www.baidu.com 127.0.0.1 | sed -n '6,7p' || exit 1
 
 ENTRYPOINT ["/root/entrypoint.sh"]
