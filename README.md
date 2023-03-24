@@ -20,3 +20,9 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
 ```
+
+## docker build command
+
+```
+$(which sudo) docker buildx build --push --build-arg VERSION=$(get_latest_tags.sh "pymumu/smartdns") --platform linux/arm64/v8,linux/amd64 -t harbor.duckduckfly.xyz/local/smartdns:latest -t harbor.duckduckfly.xyz/local/smartdns:$(get_latest_tags.sh "pymumu/smartdns") .
+```

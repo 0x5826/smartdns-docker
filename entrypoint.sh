@@ -2,6 +2,7 @@
 
 CONF_DIR="/etc/smartdns"
 RULES_DIR="/etc/smartdns/rules"
+RULES_LIST="china apple_cn google_cn gfwlist global"
 
 if [ ! -f "$CONF_DIR/smartdns.conf" ]
 then
@@ -22,16 +23,13 @@ then
     echo "[NOTICE] hosts.conf inited."
 fi
 
-if [ ! -f "$RULES_DIR/domestic.conf" ]
-then
-    cp /root/domestic.conf $RULES_DIR
-    echo "[NOTICE] domestic.conf inited."
-fi
-
-if [ ! -f "$RULES_DIR/foreign.conf" ]
-then
-    cp /root/foreign.conf $RULES_DIR
-    echo "[NOTICE] foreign.conf inited."
-fi
+for f in $RULES_LIST
+do
+    if [ ! -f "$RULES_DIR/$f.txt" ]
+    then
+        cp /root/$f.txt $RULES_DIR
+        echo "[NOTICE] $RULES_DIR/$f.txt inited."
+    fi
+done
 
 /usr/bin/smartdns -f -x
