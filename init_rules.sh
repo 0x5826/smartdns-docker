@@ -22,7 +22,6 @@ curl -sS https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/
 curl -sS https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt | sed 's/full\://g' > google_cn.txt
 
 # 5:Global domain list
-
 curl -sS https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | grep -v "regexp:" | sed 's/full\://g' | sort -u > global.txt
 
 # 6:Chatgpt domain list
