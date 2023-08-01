@@ -25,4 +25,14 @@ curl -sS https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/
 
 curl -sS https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | grep -v "regexp:" | sed 's/full\://g' | sort -u > global.txt
 
+# 6:Chatgpt domain list
+curl -fsSLk 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Bing/Bing.list' | \
+grep -v "#" | grep "DOMAIN" | awk -F ',' '{ print $2 }' > chatgpt.txt
+curl -fsSLk 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list' | \
+grep -v "#" | grep "DOMAIN" | awk -F ',' '{ print $2 }' >> chatgpt.txt
+
+# 7:Cryptocurrency domain list
+curl -fsSLk 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Cryptocurrency/Cryptocurrency.list' | \
+grep -v "#" | grep "DOMAIN" | awk -F ',' '{ print $2 }' > cryptocurrency.txt
+
 rm -f tmp_*
